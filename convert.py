@@ -7,7 +7,7 @@ from pathlib import Path
 CSV_URL = "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee.csv"
 
 # 出力JSONのパス（リポジトリ内に保存）
-JSON_FILE = Path("data/output.json")
+JSON_FILE = Path("data/coffee_shops.json")
 
 def csv_to_json():
     # CSVデータを取得
