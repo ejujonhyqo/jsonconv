@@ -4,8 +4,8 @@ import requests
 
 # まとめたい CSV の URL リスト
 csv_urls = [
-    "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee.csv",
-    "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee.csv",
+    "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee_shops.csv",
+    "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee_shops.csv",
 ]
 
 output_data = []
