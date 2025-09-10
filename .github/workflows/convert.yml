@@ -36,3 +36,15 @@ jobs:
           git add data/coffee_shops.json
           git commit -m "Update JSON from external CSV (auto)" || echo "No changes to commit"
           git push
+
+  notify:
+    needs: build
+    if: failure()   # build が失敗したときだけ実行
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send notification to Slack
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"CSV → JSON 更新に失敗しました"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
