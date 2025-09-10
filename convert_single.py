@@ -4,7 +4,7 @@ import requests
 from pathlib import Path
 
 # 外部CSVのURL（raw.githubusercontent.com のURLを記載）
-CSV_URL = "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee.csv"
+CSV_URL = "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main/coffee_shops.csv"
 
 # 出力JSONのパス（リポジトリ内に保存）
 JSON_FILE = Path("data/coffee_shops.json")
