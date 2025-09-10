@@ -21,5 +21,5 @@ for url in csv_urls:
         output_data.append(row)
 
 # JSON として保存（フラットなリスト）
-with open("data/output.json", "w", encoding="utf-8") as f:
+with open("data/coffee_shops.json", "w", encoding="utf-8") as f:
     json.dump(output_data, f, ensure_ascii=False, indent=2)
