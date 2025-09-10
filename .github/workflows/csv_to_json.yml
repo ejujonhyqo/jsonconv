@@ -19,19 +19,25 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
-      run: pip install requests
+      run: |
+        pip install requests
 
     - name: Run conversion script
-      run: python scripts/convert_csv_to_json.py
+      run: |
+        python scripts/convert_csv_to_json.py
 
-    - name: Commit and push changes
+    - name: Configure git
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
+        
+    - name: Commit and push changes
+      run: |
         git add data/data.json
         if git diff --cached --quiet; then
           echo "No changes to commit."
         else
           git commit -m "Update data.json from CSV source"
-          git push
-        fi
+          git push https://github.com/${{ github.repository }}.git HEAD:main
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
