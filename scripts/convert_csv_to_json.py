@@ -1,9 +1,8 @@
-# scripts/convert_csv_to_json.py
-
 import csv
 import json
 import requests
 import sys
+import os
 from io import StringIO
 
 # 外部CSVのURL（例：政府統計ポータルなどのオープンデータ）
@@ -11,16 +10,23 @@ CSV_URL = "https://raw.githubusercontent.com/ejujonhyqo/jsonconv/refs/heads/main
 OUTPUT_PATH = "data/data.json"
 
 def fetch_csv(url):
+    print(f"Fetching CSV from {url}...")
     response = requests.get(url)
+    print(f"HTTP Status Code: {response.status_code}")
     response.raise_for_status()
     return response.text
 
 def csv_to_json(csv_data):
+    print("Converting CSV to JSON...")
     csv_file = StringIO(csv_data)
     reader = csv.DictReader(csv_file)
     return list(reader)
 
 def save_json(data, path):
+    # ディレクトリがない場合は作成する
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    
+    print(f"Saving JSON to {path}...")
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
