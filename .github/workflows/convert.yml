@@ -27,7 +27,7 @@ jobs:
         run: pip install requests
 
       - name: Run converter
-        run: python convert.py
+        run: python convert_single.py
 
       - name: Commit and push if changed
         run: |
