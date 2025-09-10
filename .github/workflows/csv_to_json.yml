@@ -34,10 +34,7 @@ jobs:
     - name: Commit and push changes
       run: |
         git add data/data.json
-        if git diff --cached --quiet; then
-          echo "No changes to commit."
-        else
-          git commit -m "Update data.json from CSV source"
-          git push https://github.com/${{ github.repository }}.git HEAD:main
+        git diff --cached --quiet || git commit -m "Update data.json from CSV source"
+        git push https://github.com/${{ github.repository }}.git HEAD:main
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
