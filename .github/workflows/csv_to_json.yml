@@ -1,0 +1,40 @@
+permissions:
+  contents: write
+
+name: Update JSON from CSV
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 毎日0時（UTC）に実行（日本時間で9:00）
+  workflow_dispatch:      # 手動実行も可能にする
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Run conversion script
+      run: python scripts/convert_csv_to_json.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add data/data.json
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Update data.json from CSV source"
+          git push
+        fi
